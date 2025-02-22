@@ -3,6 +3,7 @@ extends Node
 const packets := preload("res://packets.gd")
 
 @onready var _log: Log = $UI/Log as Log
+var tls_options: TLSOptions = TLSOptions.client_unsafe()
 
 func _ready() -> void:
 	WS.connected_to_server.connect(_on_ws_connected_to_server)
@@ -10,7 +11,7 @@ func _ready() -> void:
 	WS.packet_received.connect(_on_ws_packet_received)
 		
 	_log.info("Connecting ...")
-	WS.connect_to_url("ws://localhost:8080/ws")
+	WS.connect_to_url("wss://dev.audryus.arpa:8080/ws", tls_options)
 
 func _on_ws_connected_to_server() -> void: 
 	_log.success("Connected successfully !")

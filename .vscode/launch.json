@@ -8,6 +8,11 @@
             "mode": "auto",
             "program": "${workspaceFolder}/server/cmd/main.go",
             "output": "${workspaceFolder}/server/cmd/debug_executable.exe",
+            "cwd": "${workspaceFolder}/server",
+            "args": [
+                "--config",
+                "${workspaceFolder}/server/.env"
+            ]
         }
     ]
 }
