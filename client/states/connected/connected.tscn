@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://y5xy70iuiaj1"]
+
+[ext_resource type="Script" path="res://states/connected/connected.gd" id="1_5velh"]
+[ext_resource type="PackedScene" uid="uid://crtp4qg7hbit" path="res://classes/login_form/login_form.tscn" id="2_df1pn"]
+[ext_resource type="Script" path="res://classes/log/log.gd" id="2_f6f54"]
+[ext_resource type="Theme" uid="uid://cua43wdjx138e" path="res://resources/game_theme.tres" id="2_opiex"]
+[ext_resource type="PackedScene" uid="uid://pmveq61v4eaj" path="res://classes/register_form/register_form.tscn" id="3_byg87"]
+[ext_resource type="Shader" path="res://resources/background_effect.gdshader" id="3_seb5d"]
+[ext_resource type="Texture2D" uid="uid://dams2c4e6atv6" path="res://resources/floor.svg" id="3_yb55f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_knqyp"]
+shader = ExtResource("3_seb5d")
+shader_parameter/amplitutde = Vector2(1, 0)
+shader_parameter/speed = Vector2(1, 0)
+
+[node name="Connected" type="Node"]
+script = ExtResource("1_5velh")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_opiex")
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 48
+bbcode_enabled = true
+text = "[center][b][shake][rainbow]Laughing Octo Giggle[/rainbow][/shake][/b][/center]"
+fit_content = true
+
+[node name="LoginForm" parent="UI/MarginContainer/VBoxContainer" instance=ExtResource("2_df1pn")]
+layout_mode = 2
+
+[node name="RegisterForm" parent="UI/MarginContainer/VBoxContainer" instance=ExtResource("3_byg87")]
+visible = false
+layout_mode = 2
+
+[node name="RegisterPrompt" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][i]Don't have an account ? [b][color=#E3A071][url=register]Create one here ![/url][/color][/b][/i][/center]"
+fit_content = true
+
+[node name="Log" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+script = ExtResource("2_f6f54")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_knqyp")
+texture = ExtResource("3_yb55f")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1152, 648)
